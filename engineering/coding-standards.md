@@ -27,10 +27,50 @@
 
 ## Git Workflow
 
-- Branch naming: `feature/short-description`, `fix/short-description`
-- PRs require passing build before merge
-- Squash merge to main
-- Tag releases on main after deploy
+### Branch Structure
+
+```
+main                          ← production, protected — PRs only, Phillip approval required
+develop                       ← CI/CD deploys to dev EC2 on every push
+feature/phase-N-name          ← one per phase, branched off develop
+feature/phase-N-story-N-desc  ← one per story, branched off its phase branch
+fix/short-description         ← hotfixes, branched off main
+```
+
+### Rules
+
+- **Never commit directly to `main` or `develop`** — all changes via PR
+- Every story gets its own branch off the current phase feature branch
+- Story branch → PR → phase feature branch (Phillip approval required)
+- Phase feature branch → PR → `main` when all stories are complete (Phillip approval required)
+- `main` → triggers prod deploy with manual approval gate in GitHub
+- `develop` → triggered by merging phase feature branch in for dev testing before merging to main
+
+### Branch Naming
+
+| Type | Pattern | Example |
+|---|---|---|
+| Phase feature | `feature/phase-N-name` | `feature/phase-1-foundation` |
+| Story | `feature/phase-N-story-N-description` | `feature/phase-1-story-3-member-portal` |
+| Hotfix | `fix/description` | `fix/invoice-decimal-precision` |
+
+### PR Process
+
+1. **Start a story:** branch off the current phase branch
+   ```bash
+   git checkout feature/phase-1-foundation
+   git checkout -b feature/phase-1-story-3-member-portal
+   ```
+2. **Finish a story:** open PR to phase feature branch, request Phillip's approval
+3. **Finish a phase:** open PR from phase feature branch → `main`, request Phillip's approval
+4. PRs require a passing build (GitHub Actions) before approval is requested
+5. Code review (`/superpowers:requesting-code-review`) before opening any PR
+
+### Current Phase Branches
+
+| Branch | Phase | Status |
+|---|---|---|
+| `feature/phase-1-foundation` | Phase 1 — Foundation | Active |
 
 ## Testing
 

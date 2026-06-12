@@ -226,6 +226,36 @@ aws cloudfront create-invalidation --distribution-id E3SG546WOCI8JM --paths "/*"
 | `sgi-website` | Next.js static site → S3/CloudFront | `git@github.com:Semper-Gratus-Inc/sgi-website.git` |
 | `sgi-docs` | Internal docs, business rules, runbooks | `git@github.com:Semper-Gratus-Inc/sgi-docs.git` |
 
+### Branching Rules — MUST FOLLOW EVERY SESSION
+
+```
+main                          ← production, NEVER commit directly
+develop                       ← CI/CD deploys to dev EC2 on push
+feature/phase-N-name          ← one per phase, branched off develop
+feature/phase-N-story-N-desc  ← one per story, branched off its phase branch
+fix/short-description         ← hotfixes off main only
+```
+
+**Before starting any story:**
+1. Check out the current phase feature branch
+2. Branch off it: `git checkout -b feature/phase-N-story-N-description`
+3. Do all work on that branch — zero commits to main or develop directly
+
+**When a story is complete:**
+1. Run code review (`/superpowers:requesting-code-review`)
+2. Fix all Critical and Important issues
+3. Open PR: story branch → phase feature branch
+4. Tag Phillip for approval — do NOT merge without it
+
+**When a phase is complete:**
+1. Open PR: phase feature branch → `main`
+2. Tag Phillip for approval — do NOT merge without it
+
+**Current active branches:**
+| Branch | Phase | Status |
+|---|---|---|
+| `feature/phase-1-foundation` | Phase 1 — Foundation | Active |
+
 ### CI/CD (GitHub Actions)
 Workflow files are in `sgi-app/.github/workflows/`:
 - `deploy-dev.yml` — triggers on push to `develop` branch → deploys to dev EC2
