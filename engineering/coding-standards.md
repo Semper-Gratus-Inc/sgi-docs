@@ -48,11 +48,20 @@ fix/short-description         ← hotfixes, branched off main
 
 ### Branch Naming
 
+Branch names map directly to GitHub issue titles. Use the `SD-` prefix + GitHub issue number + the issue title (kebab-cased).
+
 | Type | Pattern | Example |
 |---|---|---|
 | Phase feature | `feature/phase-N-name` | `feature/phase-1-foundation` |
-| Story | `feature/phase-N-story-N-description` | `feature/phase-1-story-3-member-portal` |
-| Hotfix | `fix/description` | `fix/invoice-decimal-precision` |
+| Story | `story/SD-[#]-[issue-title]` | `story/SD-4-member-portal` |
+| Bug | `bug/SD-[#]-[issue-title]` | `bug/SD-17-invoice-decimal-mismatch` |
+| Hotfix (prod) | `fix/SD-[#]-[issue-title]` | `fix/SD-22-payment-webhook-timeout` |
+
+**Rules:**
+- `SD` stands for Semper Dev — use it on every branch, no exceptions
+- `[#]` is the GitHub issue number
+- `[issue-title]` is the GitHub issue title, lowercased and hyphenated — do not rename or paraphrase it
+- Branch names should be recognizable from the issue list at a glance
 
 ### PR Process
 

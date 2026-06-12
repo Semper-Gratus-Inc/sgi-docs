@@ -236,10 +236,22 @@ feature/phase-N-story-N-desc  ← one per story, branched off its phase branch
 fix/short-description         ← hotfixes off main only
 ```
 
+**Branch naming — use the GitHub issue number and title exactly:**
+
+| Type | Pattern | Example |
+|---|---|---|
+| Phase feature | `feature/phase-N-name` | `feature/phase-1-foundation` |
+| Story | `story/SD-[#]-[issue-title]` | `story/SD-4-member-portal` |
+| Bug | `bug/SD-[#]-[issue-title]` | `bug/SD-17-invoice-decimal-mismatch` |
+| Hotfix (prod) | `fix/SD-[#]-[issue-title]` | `fix/SD-22-payment-webhook-timeout` |
+
+`SD` = Semper Dev. `[#]` = GitHub issue number. Title = issue title, lowercased and hyphenated, verbatim.
+
 **Before starting any story:**
-1. Check out the current phase feature branch
-2. Branch off it: `git checkout -b feature/phase-N-story-N-description`
-3. Do all work on that branch — zero commits to main or develop directly
+1. Check the GitHub issue number and title
+2. Check out the current phase feature branch
+3. Branch off it: `git checkout -b story/SD-[#]-[issue-title]`
+4. Do all work on that branch — zero commits to main, develop, or the phase branch directly
 
 **When a story is complete:**
 1. Run code review (`/superpowers:requesting-code-review`)
