@@ -81,6 +81,8 @@ Branch names map directly to GitHub issue titles. Use the `SD-` prefix + GitHub 
 |---|---|---|
 | `feature/phase-1-foundation` | Phase 1 — Foundation | Active |
 
+> **Note:** GitHub branch protection requires Team plan. `main` is not repo-enforced — process discipline and Claude's CLAUDE.md rules are the guard.
+
 ## Testing
 
 - /health endpoint required on all APIs
