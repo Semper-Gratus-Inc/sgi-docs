@@ -80,8 +80,23 @@ Branch names map directly to GitHub issue titles. Use the `SD-` prefix + GitHub 
 | Branch | Phase | Status |
 |---|---|---|
 | `feature/phase-1-foundation` | Phase 1 — Foundation | Active |
+| `feature/phase-2-auth-and-admin` | Phase 2 — Auth & Admin Shell | Next |
 
 > **Note:** GitHub branch protection requires Team plan. `main` is not repo-enforced — process discipline and Claude's CLAUDE.md rules are the guard.
+
+### Phase Priority Order
+
+Do not start a phase until the previous one is complete and merged via PR.
+
+| Phase | Issues | Description |
+|---|---|---|
+| 1 | #1, #2 (closed) | Foundation — API connected to DB, core entities |
+| 2 | #3, #4, #5 | Auth & Admin Shell |
+| 2.5 | #25, #26, #27, #32, #33 | Deploy to prod, NGINX, SSL, SES |
+| 3 | #6–#16, #34, #35 | Client operations — client mgmt, contracts, invoices, Stripe |
+| 3.5 | #17, #18 | Client portal — magic-link login, client view |
+| 4 (deferred) | #19–#24, #31 | Gym client — DO NOT start until Phase 3.5 is done |
+| 5 | #28, #29, #30 | Observability & security |
 
 ## Testing
 
